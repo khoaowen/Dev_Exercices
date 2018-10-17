@@ -1,14 +1,11 @@
 package robot.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import robot.model.HeadingPosition;
+import robot.model.Instruction;
 import robot.model.Rover;
-import robot.model.instruction.ForwardInstruction;
-import robot.model.instruction.Instruction;
 
 public class CommandProcessor {
 	
@@ -54,31 +51,12 @@ public class CommandProcessor {
 
 	private static void play(Plateau plateau, Rover rover, List<Instruction> instructions) {
 		for (Instruction ins : instructions) {
+			ins.instr.accept(rover);
 			rover.setInstruction(ins);
 			rover.applyCommand(plateau);
 		}
 	}
 	
-	enum Instruction {
-		M((robot) -> {
-			/**/
-		}),
-		L((robot) -> {
-			robot.setHeading(HeadingPosition.turnLeft(robot.getHeading()));
-		}),
-		R((robot) -> {
-			robot.setHeading(HeadingPosition.turnRight(robot.getHeading()));
-		});
-		
-		Consumer<Rover> instr;
-
-		private Instruction(Consumer<Rover> instr) {
-			this.instr = instr;
-		}
-		
-		
-	}
-
 	private static List<Instruction> parse(String commandLine) {
 		return commandLine.chars()
 		.mapToObj(c -> String.valueOf((char) c))

@@ -1,10 +1,6 @@
 package robot.model;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import robot.controller.Plateau;
-import robot.model.instruction.Instruction;
 
 public class Rover {
 
@@ -54,7 +50,7 @@ public class Rover {
 	}
 	
 	public void applyCommand(Plateau plateau) {
-		instruction.applyCommand(this);
+		instruction.instr.accept(this);
 	}
 	
 	
@@ -64,77 +60,77 @@ public class Rover {
 	
 	
 	
-	public void applyCommand(Plateau plateau, String command) {
-		instruction.applyCommand(this);
-		
-		switch (command) {
-		case "M":
-			switch (this.heading) {
-			case E:
-				if (x + 1 > plateau.getTotalX()) {
-					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
-					return;
-				}
-				x++;
-				break;
-			case N:
-				if (y + 1 > plateau.getTotalY()) {
-					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
-					return;
-				}
-				y++;
-				break;
-			case S:
-				if (y- 1 < 0) {
-					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
-					return;
-				}
-				y--;
-				break;
-			case W:
-				if (x- 1 < 0) {
-					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
-					return;
-				}
-				x--;
-				break;
-			}
-			break;
-		case "L":
-			switch (this.heading) {
-			case E:
-				this.heading = HeadingPosition.N;
-				break;
-			case N:
-				this.heading = HeadingPosition.W;
-				break;
-			case S:
-				this.heading = HeadingPosition.E;
-				break;
-			case W:
-				this.heading = HeadingPosition.S;
-				break;
-			}
-			break;
-		case "R":
-			switch (this.heading) {
-			case E:
-				this.heading = HeadingPosition.S;
-				break;
-			case N:
-				this.heading = HeadingPosition.E;
-				break;
-			case S:
-				this.heading = HeadingPosition.W;
-				break;
-			case W:
-				this.heading = HeadingPosition.N;
-				break;
-			}
-			break;
-		default:
-			throw new RuntimeException("Command is not handled: " + command);
-		}
-	}
+//	public void applyCommand(Plateau plateau, String command) {
+//		instruction.applyCommand(this);
+//		
+//		switch (command) {
+//		case "M":
+//			switch (this.heading) {
+//			case E:
+//				if (x + 1 > plateau.getTotalX()) {
+//					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
+//					return;
+//				}
+//				x++;
+//				break;
+//			case N:
+//				if (y + 1 > plateau.getTotalY()) {
+//					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
+//					return;
+//				}
+//				y++;
+//				break;
+//			case S:
+//				if (y- 1 < 0) {
+//					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
+//					return;
+//				}
+//				y--;
+//				break;
+//			case W:
+//				if (x- 1 < 0) {
+//					Logger.getLogger(Rover.class.getName()).log(Level.WARNING, POSITION_OUT_OF_SCOPE_ERROR_MESSAGE);
+//					return;
+//				}
+//				x--;
+//				break;
+//			}
+//			break;
+//		case "L":
+//			switch (this.heading) {
+//			case E:
+//				this.heading = HeadingPosition.N;
+//				break;
+//			case N:
+//				this.heading = HeadingPosition.W;
+//				break;
+//			case S:
+//				this.heading = HeadingPosition.E;
+//				break;
+//			case W:
+//				this.heading = HeadingPosition.S;
+//				break;
+//			}
+//			break;
+//		case "R":
+//			switch (this.heading) {
+//			case E:
+//				this.heading = HeadingPosition.S;
+//				break;
+//			case N:
+//				this.heading = HeadingPosition.E;
+//				break;
+//			case S:
+//				this.heading = HeadingPosition.W;
+//				break;
+//			case W:
+//				this.heading = HeadingPosition.N;
+//				break;
+//			}
+//			break;
+//		default:
+//			throw new RuntimeException("Command is not handled: " + command);
+//		}
+//	}
 
 }
