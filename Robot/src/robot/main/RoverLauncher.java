@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import robot.controller.CommandProcessor;
-import robot.controller.Plateau;
+import robot.model.Plateau;
 import robot.model.Rover;
 
 public class RoverLauncher {
