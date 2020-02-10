@@ -50,12 +50,12 @@ class Solution {
 			if (firstChar == bits.charAt(i)) {
 				counter++;
 			} else {
-				blocs.add(new Bloc(PREFIX.fromChar(firstChar), counter));
+				blocs.add(new Bloc(Prefix.fromChar(firstChar), counter));
 				firstChar = bits.charAt(i);
 				counter = 1;
 			}
 			if (i == bits.length() - 1) {
-				blocs.add(new Bloc(PREFIX.fromChar(firstChar), counter));
+				blocs.add(new Bloc(Prefix.fromChar(firstChar), counter));
 			}
 		}
 		return blocs;
@@ -82,16 +82,16 @@ class Solution {
 		return bd.append(bits).toString();
 	}
 
-	public static Bloc convertToBlocs(String bits, PREFIX prefix) {
+	public static Bloc convertToBlocs(String bits, Prefix prefix) {
 		return new Bloc(prefix, bits.length());
 	}
 
-	public enum PREFIX {
+	public enum Prefix {
 		ZERO("00 "), ONE("0 ");
 
 		private final String value;
 
-		PREFIX(String val) {
+		Prefix(String val) {
 			value = val;
 		}
 
@@ -99,7 +99,7 @@ class Solution {
 			return value;
 		}
 
-		public static PREFIX fromChar(char c) {
+		public static Prefix fromChar(char c) {
 			if (c == '1') {
 				return ONE;
 			} else {
@@ -109,15 +109,15 @@ class Solution {
 	}
 
 	public static class Bloc {
-		private final PREFIX prefix;
+		private final Prefix prefix;
 		private final int length;
 
-		Bloc(PREFIX prefix, int length) {
+		Bloc(Prefix prefix, int length) {
 			this.prefix = prefix;
 			this.length = length;
 		}
 
-		public PREFIX getPrefix() {
+		public Prefix getPrefix() {
 			return prefix;
 		}
 
